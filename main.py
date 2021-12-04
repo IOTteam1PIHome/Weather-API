@@ -23,7 +23,7 @@ print("최고 기온 = ", k2c(data["main"]["temp_max"]), "°C")
 print("습도 = ", data["main"]["humidity"], "%")
 print(" ")
 
-server = ""
+server = "34.193.131.206"
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with RC : " + str(rc))
@@ -39,8 +39,9 @@ if len(sys.argv) <= 1:
 
 client = mqtt.Client()
 client.connect(server, 1883, 60)
-client.on_connect = on_connect
-client.on_message = on_message
+# client.on_connect = on_connect
+# client.on_message = on_message
+client.publish("pi/weather", data["weather"][0]["description"])
 
 client.loop_start()
 
