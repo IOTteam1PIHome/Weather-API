@@ -34,8 +34,8 @@ def on_message(client, userdata, msg):
     if who != sys.argv[1]:
         print(msg.payload.decode('UTF-8'))
 
-if len(sys.argv) <= 1:
-    print("Usage : " + sys.argv[0] + " myID")
+# if len(sys.argv) <= 1:
+#     print("Usage : " + sys.argv[0] + " myID")
 
 client = mqtt.Client()
 client.connect(server, 1883, 60)
@@ -44,6 +44,3 @@ client.connect(server, 1883, 60)
 client.publish("pi/weather", data["weather"][0]["description"])
 
 client.loop_start()
-
-for line in sys.stdin:
-    client.publish("", (str(sys.argv[1])+" : "+line.strip()).encode('UTF-8'))
